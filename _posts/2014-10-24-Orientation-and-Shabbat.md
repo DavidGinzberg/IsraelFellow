@@ -1,5 +1,5 @@
 ---
-format: post
+layout: post
 title: Orientation and Shabbat
 ---
 
