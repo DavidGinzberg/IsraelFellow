@@ -16,4 +16,4 @@ At least for now, I expect anyone looking at this page already knows who I am, b
 
 ### Contact me
 
-For now this blog is targeted at people who already know me and how to reach me, so I won't be including any additional contact info here. However it is worthwhile to note that despite being in Israel during this program, I can still send and receive calls and tests from my US number (more about that in a post...later).
+For now this blog is targeted at people who already know me and how to reach me, so I won't be including any additional contact info here. However it is worthwhile to note that despite being in Israel during this program, I can still send and receive calls and texts with my US number (more about that in a post...later).
