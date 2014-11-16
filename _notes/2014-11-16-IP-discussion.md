@@ -39,11 +39,11 @@ Why is static IP useful
 
 #### Exercise
 
-# Check your IP address using ipconfig
-# Try `ipconfig /all` too
-# Try to ping the IP address of someone sitting next to you
-# Try to trace the route to someone else's computer using `tracert`
-# Try to trace the route to [www.google.com](www.google.com)
+1. Check your IP address using ipconfig
+1. Try `ipconfig /all` too
+1. Try to ping the IP address of someone sitting next to you
+1. Try to trace the route to someone else's computer using `tracert`
+1. Try to trace the route to [www.google.com](www.google.com)
 
 ### DNS (Domain Name Server)
 
