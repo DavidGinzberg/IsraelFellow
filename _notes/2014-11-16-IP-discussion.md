@@ -98,3 +98,15 @@ When you type a URL the computer checks first in the hosts file for the URL. If 
 - create a CNAME record with your name -> www.google.com
 - Try `ipconfig /displaydns` to see the local cache
 - Try to clear the local cache with `ipconfig /flushdns`
+
+### Active Directory Exercise:
+
+- Go to server manager :right_arrow: Roles :right_arrow: Add role
+- Choose Active Directory Domain Services
+- Choose the domain you chose before (in the DNS)
+- Set up a new forest
+- Create a new VM with Windows 7 on it
+- Define your new AD+DNS server as its DNS server
+- Add it to the newly created domain:
+-- Right click `My Computer` :right_arrow: `Properties`
+-- Under `Computer Name, Domain, and Workgroup Settings` choose `Change Settings`
