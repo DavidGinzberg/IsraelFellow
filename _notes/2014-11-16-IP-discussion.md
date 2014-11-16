@@ -60,3 +60,34 @@ names are easily remembered than IP addresses
 
 When you type a URL the computer checks first in the hosts file for the URL. If it's not found then it goes to the next level for the DNS (usually the default gateway)
 
+#4 DNS Records
+- A (Name -> IPv4)
+- AAA (Name :arrow_right: IPv6)
+- CNAME (Name :arrow_right: other Name)
+
+#5 Zones
+- The domain for a particular site (eg: google.com or ynet.co.il)
+- Usually has one DNS server that is the system of record for that entire zone. This server also has the records for subdomains within that zone.
+- Zones include dangling TLDs eg: .net, .il, .co.il -- these zones contain other smaller zones.
+- Each zone replies to DNS requests by pointing to the record it has for the requested address -- usually a smaller zone until you hit the SoR for a domain.
+
+#4 The magic called Ping
+- `ping google.com -t` -- Continuous ping
+- `ping -a 173.194.113.50` -- IP :arrow_right: name translation
+- ping is a good way to test the presence/quality of a connection
+
+#3 DNS related Attacks
+- DNS spoofing/Cache poisoning is a common attack
+-- Fake a DNS entry or cached DNS to hijack a connection
+- DNS hijacking / man in the middle
+- DOS (Denial of Service)
+-- May deny more than just the targeted service; could include DNS servers on the way
+
+#3 Exercise (On Windows svr 2008 vm):
+- Go to server manager -> Roles -> Add role
+- Choose a DNS server
+- Create a domain that doesn't have name resolution
+- Create a A record for the local server with your name
+- create a CNAME record with your name -> www.google.com
+- Try `ipconfig /displaydns` to see the local cache
+- Try to clear the local cache with `ipconfig /flushdns`
