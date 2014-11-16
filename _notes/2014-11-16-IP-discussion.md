@@ -43,3 +43,20 @@ Why is static IP useful
 # Try to ping the IP address of someone sitting next to you
 # Try to trace the route to someone else's computer using `tracert`
 # Try to trace the route to [www.google.com](www.google.com)
+
+#3 DNS (Domain Name Server)
+
+~Resolution between IP address and Host name (Name resolution)~
+
+names are easily remembered than IP addresses
+
+#4 DNS mini-exercise
+- ping google.com
+- ping www.google.com
+
+*Local name resolution*
+- ping localhost
+- C:\Windows\System32\drivers\etc\hosts
+
+When you type a URL the computer checks first in the hosts file for the URL. If it's not found then it goes to the next level for the DNS (usually the default gateway)
+
