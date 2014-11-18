@@ -230,3 +230,60 @@ incoming gorilla example -- actually it was a moonwalking bear but the contrast 
   - redundant
 
 "No business will say 'take all this money and go improve your data'."
+
+##### Creating a Model Set
+- Assembling customer signatures
+  - Creating single united signatures
+-Create a balanced sample
+  - Balance different groups
+- Create a model set and partitioning
+  - Training, validation, and testing - Three different data sets to prevent over-fitting
+
+#### Model
+- The model is what provides the transformation from data to actionable knowledge
+- Selecting of the modelling techniques is based upon the data science objective
+- Modelling is an iterative process
+
+##### Select and Build Models
+- What type of data science modeling task do we need?
+  - _**Directed** models_: We know in advance which analysis problem we want to solve - _**has a target variable**_
+  - Undirected
+  - Descriptive
+  - Supervised learning
+  - Unsupervised learning
+  
+#####Two main learning paradigms
+- Supervised
+  -Classification
+  -estimation
+- Unsupervised
+  - Clustering
+  - Association rules
+- Both
+  - Anomaly detection
+  - Collaborative filtering
+##### Data mining Tasks: Classification
+- Predicts categorical class labels, very human imperative
+- Example:
+  - Classify credit applicants to low/mid/high risk
+  - Place a new customer in a specific product program
+  
+##### Data Mining Tasks: Estimation
+- Similar to classification but continuous outcome. Estimate valuses of variable from evolution of other continuous or nominal values
+
+##### Data Mining Task: Clustering
+- Clustering/segmentation: Clustering is the detection of groups of individuals. no predefined categories.
+- Example
+  - Find types (clusters) of telephone calls or cc purchases
+  - Market segmentation
+
+##### Data Mining Tasks: Association Rules
+- Methods to study attributes or characteristics that "go together"- market based analysis
+- An association between two attributes happens when the frequency of two specific values happen together is relatively high
+Example:
+  - What products are purchased together
+  - Beer and diaper case (huh?)
+  - etc. (missed)
+
+##### Data Mining Task: Collaborative Filtering
+- Method or making automatic predictions (filtering) about interests of users or entities
