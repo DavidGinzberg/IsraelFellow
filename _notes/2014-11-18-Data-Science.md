@@ -115,3 +115,46 @@ Site: [KDNuggets](http://www.kdnuggets.com/)
   - Today: Ongoing decision making  based on analytics components
   
 ## _10 minute break_
+
+
+### _Aaaaand we're back_
+
+## The data Science Cycle
+
+###Business Understanding
+- Learn the subject, and drill down, to create:
+  - Statement of *Business Objective/Problem*
+  - Statement of *Data Mining Objective*
+  - Statement of *Success Criteria*
+
+Focus on understanding the project objectives/requirements from a business perspective and convert this knowledge to a data science problem.
+
+#### Telco Churn example
+- Churn is when a customer leaves a company in some way
+  - Business problem: Impacts bottom line
+  - Data Science problem: ???
+- What business problems would lead to churn being an issue?
+  - High customer acquisition costs
+  - A goal of higher market share
+  - long-term customers are more predictable and allow network optimization
+  - Decrease expenditure on help desk
+  - Decrease exposure to fraud and bad debt
+  - Higher confidence of investors
+  - Increased added-value sales to long-term customers
+- In which of these cases would a model of churn be helpful?  
+  how do they impact the model
+-What is churn?
+  - Absolute?
+  - Per customer?
+  - Per line?
+  - Per service?
+  - What if a customer leaves the country (the planet?)?
+  - What if the customer required technology we can't provide?
+  - Are we interested in a particular customer segment?
+
+#### Business Understanding - Telco Churn
+- Statement of business objective
+  - Increase market share -- since recruiting new customers is more expensive than preserving customers, prevent churn by identifying ahead of time profitable customers that are about to leave and retain them
+- Statement of DS Objective
+  - For permanent customers predict abandonment 15 days before customer decision (Absolute Churn)
+  - Estimate customer life-time-value
