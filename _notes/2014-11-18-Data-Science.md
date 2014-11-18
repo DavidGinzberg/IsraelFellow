@@ -287,3 +287,48 @@ Example:
 
 ##### Data Mining Task: Collaborative Filtering
 - Method or making automatic predictions (filtering) about interests of users or entities
+
+~~Short Break with funny formatting~~
+
+####Evaluation
+
+- How accurate is the model
+- compared to na:ive models
+- how much ocnfidence can we phave in the model's predictions?
+- How understandable is the outcome
+- HOw comprehensible is the model -- this sounds more like resiliency (thought he meant comprehensive); also addresses how the output is conveyed/supported when presented to the client.
+
+
+
+#####Classification Evaluation: Accuracy Measures
+- **TP** - True Positive (Classified Positive, Reality Positive)
+- **TN** - True Negative (Classified Negative, Reality Negative)
+- **FP** - False Positive (Classified Positive, Reality Negative)
+- **FN** - False Negative (Classified Negative, Reality Positive)
+- Total Accuracy = 
+- Sensitivity, recall - Probability of correctly classifying a positive event ("Hit Rate") 
+- Specificity - probability of correctly classifying a negative event
+- Precision - Percentage of positive predictions that are correct
+- False alarm rate (false positive rate) = 
+- F-measure : 2*(recall*precision)/(recall+precision)
+  **_Get the definitions and equations from the slides_**
+  
+##### Evaluation: Lift Chart
+- **Lift** is a measure of the effectiveness of a predictive model calculated as the ratio between the results obtained with and without predictive model
+- Customer base: 10m, Random 1% churn = 100K
+- ideally a model should be well above the x=y line (random line)
+- lift = model response minus random line for some x% of customer base/population
+
+##### Deployment
+- Moving from data science space to the actual application
+- Determine how the results need to be utilized
+- Who needs to use them
+- Continuous data preprocessing
+- Scalability
+- Ongoing Tuning
+
+##### Why is model evaluation not sufficient
+- Not every successful model leads to good results
+  -fixed cost of the campaign and model
+  - cost of making an offer
+  - cost of fulfilment
