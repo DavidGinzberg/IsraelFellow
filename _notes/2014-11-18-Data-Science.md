@@ -152,9 +152,81 @@ Focus on understanding the project objectives/requirements from a business persp
   - What if the customer required technology we can't provide?
   - Are we interested in a particular customer segment?
 
-#### Business Understanding - Telco Churn
+##### Business Understanding - Telco Churn
 - Statement of business objective
   - Increase market share -- since recruiting new customers is more expensive than preserving customers, prevent churn by identifying ahead of time profitable customers that are about to leave and retain them
 - Statement of DS Objective
   - For permanent customers predict abandonment 15 days before customer decision (Absolute Churn)
   - Estimate customer life-time-value
+  
+- Statement of Success Criteria
+  - Missed it :frown:
+  
+##### Business Understanding - Common Mistakes
+- Avoid technical descriptions - it's all about understanding the business problem
+- Avoid solving lovely problems that don't help the business
+- Start top-down, business problem usually are high level:
+  - Profitability, Market Share, ROI, Renewals, Revenues usw...
+- Have a clear & agreed measure for success!
+- Remember - Data Science is yet another tool, not a solution for everything!
+
+##### Data Understanding
+
+What types of information do you want to know to predict churn?
+- visits to competitor websites
+- Usage statistics
+- Spending
+- Customer age (age of account)
+- social group
+- Personal data (age, demographic, etc.)
+
+#####Data, Data, Data is KING!
+- Data is typically a record on a customer/patient/product/entity
+- For example, in retail a record may include:
+  - Customer data (gender, age, location)
+  - Behavioral data (last purchases, seasonal...)
+  - External knowledge (weather, competition, state of the organization...)
+- Data is mostly historical
+  - Identify trends in the past and predict them in the future
+- Other data available
+  - Text video, images, audio
+  - Web, social media
+  
+##### How to select appropriate data
+incoming gorilla example -- actually it was a moonwalking bear but the contrast was too tough to see. re-watch it [here](https://www.youtube.com/watch?v=Ahg6qcgoay4)  
+
+- Ideally data will be stored in a data warehouse - clean, accurate, and available
+- Write down he wish list of data
+  - Domain expert in light  of the business problem
+  - What is available, what can we acquire?
+  - Combine data repositories
+- HOw much data do we need? ... Depends
+  - more is usually better
+    - seasonality is key. Probably want at least one year
+  - How much history?
+  - How many and which variables?
+- Sample... at the end of the day the data MUST contain all possible outcomes
+- Get to know your data!!!
+
+##### Why is the data and Data Understanding so Important?
+
+- DS needs data!
+- GIGO: Garbage In Garbage Out
+- Caution: Data can be misleading
+
+#### Data Preparation
+
+- Takes usually _over 90% of the time_
+  - Collection
+  - Data selection
+  - ??? (Missed it)
+  
+##### Simple example why prepare data
+- Data in the real world is dirty
+  - incomplete (eg: occupation="") [:bulb:](http://thecodelesscode.com/case/31)
+  - old     (eg: age)
+  - noisy
+  - inconsistent ([canadian zipcodes](http://en.wikipedia.org/wiki/Postal_codes_in_Canada))
+  - redundant
+
+"No business will say 'take all this money and go improve your data'."
