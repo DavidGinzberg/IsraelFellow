@@ -70,3 +70,27 @@ Make better Decisions using Big Data
   - Decide based on real-time Big Data
 - We'll focus on Decision and Analysis
 
+
+   Video example -- [MR. Kelly orders a pizza](https://www.aclu.org/ordering-pizza)
+   
+### The birth of a new role: Data Scientist
+
+[Data science definition](http://en.wikipedia.org/wiki/Data_science)  
+Gartner (March 2012)
+ - Data Management
+   - Understand data
+ - Analytics modeling
+   - Know analytics
+ - Business analysis
+   - Focus on the business
+     -Goals
+     - Constraints
+     - Decisions
+     - Communication of results
+
+Data scientist categories
+- Programming skills
+- Technical platform knowledge
+- Communication skills
+- Domain knowledge
+- Mathematical/Statistical skills
