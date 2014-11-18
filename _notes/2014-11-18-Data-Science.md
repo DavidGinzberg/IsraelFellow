@@ -10,21 +10,21 @@ Alon Kaufman PhD.
 
 * over 8000 customers, 7y building proven ROI products based on ML
 * In israel, team of 25 data scientists, 8PhD's focusing on:
-** Financial fraud detection (nline banking & ecommersce)
-** Cybercrime, security risk analysis
-** IT advanced solutions
-** General data science services for companies entering the field
+  * Financial fraud detection (nline banking & ecommersce)
+  * Cybercrime, security risk analysis
+  * IT advanced solutions
+  * General data science services for companies entering the field
 * End to end business solutions
 
 ## What we know about big data
  - 4 'v's: variety, volume, velocity, value
  - It's **BIG**
- -- 2.5 Petabytes generated daily
+  - 2.5 Petabytes generated daily
  - It's a buzz word (in 2012 anyway)
  - it's messy
  - It's unused
- -- Only 23% estimated as valuable
- -- but only 3% is actually tagged and .5% analyzed
+  - Only 23% estimated as valuable
+  - but only 3% is actually tagged and .5% analyzed
  - but people say it's useful (See gartner magnitude index -- [here?](http://www.collaborative.com/blog/useful-models-for-indexing-big-datas-impact/))
  - How does it all make sense? *analyze it*
  
@@ -36,7 +36,7 @@ Alon Kaufman PhD.
 - financial services
   * fraud detection
 - manufacturing
--- anomaly detection
+  - anomaly detection
 - government
 - Advertising and PR
 - Media & Telecom
