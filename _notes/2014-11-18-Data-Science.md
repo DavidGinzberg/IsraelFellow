@@ -332,3 +332,37 @@ Example:
   -fixed cost of the campaign and model
   - cost of making an offer
   - cost of fulfilment
+  
+## Danger! What DS is not or cannot do
+- DS Cannot be treated as a black box
+- Not a plug & play application
+- Preferred model is the Data Mining/Business Intelligence department reporting to the managerial level
+- DS is not magic
+- DS Can be misleading if not interoperated correctly
+- DS can discover patterns that are meaningless
+
+
+DS Example: [decide.com video](https://www.youtube.com/watch?v=zh2fHPzfVts)  
+[Fraud detection](http://www.condenaststore.com/-sp/You-know-you-can-do-this-just-as-easily-online-New-Yorker-Cartoon-Prints_i8545910_.htm)
+
+---
+---
+###The fraud detection & prevention world
+- The problem
+  - Stopping fraud
+    - If it doesn't work it's worthless
+  - Usability
+    - Customer must not be inconvenienced by the solution
+  - Interpretability
+    - Result must be more than just a yes/no. Needs reasons and support for confirmatino and legal
+  - Dynamic target environment
+    - Fraudsters always changing tactics
+
+####Data Science Applicative Practice
+- Data science is not about finding **_any_** signal in the data
+- it's about finding the signal in the data that makes sense
+- Data science is not magic. Understand your problem and apply he right modelling techniques.
+
+##Wrap-up
+Today was 'big picture' focused.  
+Next 7 talks will focus more on real business problems.
