@@ -94,3 +94,24 @@ Data scientist categories
 - Communication skills
 - Domain knowledge
 - Mathematical/Statistical skills
+
+EMC definition of big data: the art of using (big) data to solve business problems.  
+Site: [KDNuggets](http://www.kdnuggets.com/)
+[languages](http://www.kdnuggets.com/polls/2013/languages-analytics-data-mining-data-science.html)  
+
+####Why is Data Science different from "Old" statistics/data mining/machine learning?
+
+- Type of Data
+  - Before: structured
+  - Today: Structured& unstructured
+-Availability
+  - Before: No data available, every research new collection
+  - Today: Data already collected; available for analysis
+- Volume
+  - Before: Existing tools were able to process small samples
+  - Today Good processing capabilities for terabytes of data
+- Productization
+  - Before: Analysis mainly for research purposes
+  - Today: Ongoing decision making  based on analytics components
+  
+## _10 minute break_
