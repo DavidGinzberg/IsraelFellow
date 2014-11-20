@@ -64,9 +64,43 @@ little endian for 1:
 
    *note*: There are other ways to do it, but they're weird(er) and complicated and we probably won't see them today.
 
+####Challenges:
 
-
-
+1. Write a function that takes two parameters and changes the first one without referencing it. eg:  
+    ```c
+    int func(int a, int b){
+        //Change the value of a without referencing either parameter
+    }
+    ```
+2. Repeat exercise 1, but with a function that uses the fastcall convention below:  
+    ```c
+    int __fastcall func(int a, int b){
+        //Change the value of a without referencing either parameter
+    }
+    ```
+3. Print all the opcodes (instructions) in main
+4. What's the difference between the two structs below:  
+    struct 1:  
+    ```c
+    struct s
+    {
+        int a;
+        int b;
+    }
+    ```
+    struct 2:  
+    ```c
+    struct t
+        {
+        int a;
+        int b;
+        int c;
+        int d;
+        int e;
+        int f;
+    }
+    ```
+5. Print the addresses of all of the 'call' opcodes inside main.
 
    note: stack operations and calling conventions in asm seem to be a source of confusion today -- consider this for a lecture later on.  
    other important topics:  
