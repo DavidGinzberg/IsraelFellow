@@ -257,8 +257,107 @@ x64 (64-bit)
 - Be a great client as well as server platform
 
 
+---
 
+##Windows Editions
+- Windows XP Home
+- Windows Professional (2000, XP), Vista, 7, 8.x
+  - Main desktop (client) OS
+- Windows Server Standard, Advanced, Datacenter editions ( Windows 2000, 2003, 2008, 2008 R2 etc)
+- ...
 
+Windows Numeric Versions
+- Windows NT 4 (4.0)
+- Windows 2000 (5.0)
+- Windows XP (5.1)
+- Windows Server 2003, 2003 R2 (5.2)
+- Windows Vista, Server 2008 (6.0)
+- Windows 7, Server 2008 R2 (6.1)
+- Windows 8, Server 2012 (6.2)
+- Windows 8.1, Server 2012 R2 (6.3)
+- Windows 10 (6.4)
+- *These versions obtained using `GetVersionEx`
 
+*Reasons for Vista failure*
+- Kernel was actually very good
+- Mostly marketing failures
+  - 6 year gap since XP - people were too familiar with XP and didn't want to switch
+  - Resource hungry -- didn't run well on existing machines
+  - Device support for some hardware was not up to par
+  - the name 'Vista' set high expectations
+  - UAC behavior was unexpected to many programs and caused false failures
 
+###Professional Vs. Server
+- Same core system files
+- Differences
+  -Number of processors supported
+  - Maximum amount of RAM thant can be used
+  - Max of concurrent network connections supported for file and print sharing (10 on professional)
+  - Some services only appear in Server versions
+  - Other system policies and default settings (eg: thread quantum -- number of ms a thread can wait on another thread of equal priority)
+- To query OS type ...
 
+##General Architecture overview
+
+User Mode
+---
+Kernel mode
+
+**User Mode:**  
+- System Processes
+- Services
+- Environment Subsystem
+- User Applications
+- User applications
+- Subsystem DLLs
+- NTDLL.DLL -- largely undocumented lower-layer call. Almost any documentation on this is likely written by reverse-engineers and may not be consistent across versions
+---
+**Kernel Mode:**
+- Executive dispatcher
+- Kernel & Device Drivers (The only official way to add functionality to the kernel)
+- Graphics (win32k)
+- Hardware Abstraction Layer (HAL)(I'm sorry, I can't let you do that.)
+
+###Kernel Mode Components
+- Hardware abstraction Layer (HAL)
+  - Isolates the kernel and device drivers from platform specific issues
+- Kernel
+  - Thread scheduling, interrupt & exception dispatching, multiprocessor support, synchronization primitives
+- Device Drivers
+  - Loadable kernel modules that handle I/O requests for hardware devices and buses
+- Executive
+  - Virtual memory manager, object manager, security, IPC, Plug & play, power manager, configuration manager
+- Win32K.SYS
+  - Windows subsystem kernel component
+  - handles UI and graphics
+  
+### User Mode Components
+- User apps
+- System processes
+- svcs
+- Subsystem procs
+- Subsystem DLLs
+- NTDLL.DLL
+
+### Core System Files
+- Ntoskrnl.exe
+  - Executive and kernel
+  - Original is NtOsKrnl.Exe (single CPU) or NtKrnlMp.Exe (multi-CPU)
+- NtKrnlPa.exe
+  - Executive and kernel (32-bit) with support for Physical Address Extension (PAE)
+  - Original is NtKrnlPa.Exe (single CPU) or NtKrPaMp.Exe (multi CPU)
+- Hal.dll
+  - Hardware Abstraction Layer
+- Win32k.sys
+  - Kernel component of the Win32/Win64 subsystem
+- NtDll.dll
+  - System support routines and Native API dispatcher to executive services
+- Kernel32.dll, user32.dll, gdi32.dll, advapi32.dll
+  - Core windows subsystem DLLs
+-CSRSS.exe (Client Server Runtime SubSystem)
+  - The Win32/Win64 subsystem process
+  
+  
+**Note:** C:\Windows\system32 contains 64-bit components (on 64-bit systems) and C:\Windows\system64 contains 32-bit components  
+32-bit processes running on 64-bit systems that request system32 will get the contents of system64 due to FS redirection  
+On a 32-bit system system32 just contains the 32-bit components (essentially, system32 contains the native components on whatever system it resides)
