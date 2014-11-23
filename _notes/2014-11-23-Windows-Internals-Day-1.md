@@ -128,6 +128,137 @@ Run as administrator - right click or change compatibility mode (in properties) 
 _10-minute break_
 
 ##Threads
+- Thread
+  - Has attributes
+  - Entity that is scheduled by the kernel to execute code
+- A thread contains:
+  -The state of the CPU registers
+  - Current access mode (user mode or kernel mode)
+  - Two stacks, one in user mode and one in kernel mode
+  - A private storage area, called Thread Local Storage (TLS)
+    - Used, for example, to store `errno` global variable in C - Stores error code of last I/O operation
+      - Due to multithreading, this could be the wrong value if another thread also called an I/O op
+      - `errno` now has become a macro that is implemented using TLS. Each thread gets it own `errno` in its TLS and accesses it with a known index
+      - Maintains source compatibility while only requiring compiler changes for newer, multi-threaded, systems
+  - Optional Security token
+  - Optional message queue and Windows the thread creates
+    - By default windows assumes a newly created thread will be a worker thread.
+    - If the thread creates a window, it becomes a UI thread and is assigned a message queue
+    - Thread now has the responsibility to do "message pumping" -- reading the messages in the queue and processing them
+    - Trade-off: more threads can mean more robustness to recover when one thread crashes, but this requires more resources  
+    (Firefox vs chrome example: Firefox uses one thread and if any tab locks up, the browser dies. Chrome uses a thread for each tab and can recover when just one tab dies... in theory)
+  - A priority, used in thread scheduling
+    - Helps OS to decide which threads will run at what time when there are more threads than cores
+    - Priority ranges from 1 to 31 -- 31 is the highest
+    - If #threads is less than #cores, priority doesn't matter
+  - A state: running, ready, waiting
+    - Running: The thread is currently executing code on one of the processors
+    - Ready: The thread wants to run but all cores are currently occupied executing other threads
+    - Waiting: Thread does not need to run right now because it is waiting for something (a message, operation, or something else)
+    
+###User Mode vs. Kernel Mode
+- Thread Access Modes
+- User Mode
+  - Allow access to non-operating system code & Data only
+  - No access to the hardware
+  - Protects user applications from crashing the system
+    - User-mode threads can request services such as files or devices using windows API calls - Kernel checks whether it can execute the request
+    - This is done in the same thread, which switches to kernel mode, attempts to execute the API call, and then reverts to user mode
+- Kernel Mode
+  - Privileged mode for use by the kernel and device drivers only
+    - A device driver is 'the ultimate virus' -- if you can get a custom one onto a system, you can do anything
+  - Allows access to all system resources
+  - Can potentially crash the system
+    - Exceptions in kernel mode cause BSOD
+
+## Virtual Memory
+- Each process "sees" a flat, linear memory
+  - By default on 32-bit systems this is 2GB of memory
+- Internally, virtual memory may be mapped to physical memory, but may also be stored on disk
+  - There is a mapping between the virtual memory and the physical memory chunk that it represents
+  - Pagefile - used to allocate more memory than is available on the system.
+    - Virtual memory that hasn't been accessed for a while is written (swapped) to the pagefile to free up that block of physical memory for other processes.
+    - By default pages are 4Kb each
+  - Processes can access memory regardless of where it actually resides
+    - The memory manager handles mapping of virtual to physical pages
+    - This is a normally transparent process
+    - Processes cannot (and need not) know the actual physical address of a given address in virtual memory - and they can't access the memory of other processes
+    
+### Virtual Memory Layout
+
+x86 (32-bit)
+- Each process sees 2Gb of user process space
+- 2^32 bits = 4Gb. Why only half of it? This is because there is 2Gb System space
+  - This address space (system) is inaccessible to user-mode threads -- attempting to address it raises an exception
+x64 (64-bit)
+- 8192Gb (8TB) user process space
+- wow64 - "Windows on Windows" -- allows 32-bit applications to run on 64-bit systems
+  - These processes still get the 2Gb they are used to - allows the program to behave as it normally would 
+- System space is also 8TB "No kernel in the world that uses that much space. That wouldn't be a kernel; it would be a monster!"
+- Actual address space is 2^64 = 16EB
+  - Current bottleneck is the only 48-bit-wide address bus on current processors -- allows 2^48 addresses at most
+
+## Objects and Handles
+- Objects are runtime instances of static structures (object type)
+  - Examples: Processes, mutex, event, desktop, file
+- Reside in system memory space
+- Kernel code can obtain direct pointer to an object
+- User mode can only obtain a handle to an object
+  - Shields user code from directly accessing an object
+  - Handles are process-relative
+- Objects are reference counted
+  - Object may have other handles pointing to it and will not close/be destroyed until all of them are released
+- The Object Manager is the entity responsible for creating, obtaining, and otherwise manipulating objects
+  - Has lists of objects, security descriptors, handles to objects, etc.
+
+## The Registry
+- Global hierarchical repository of data
+- Machine wide data as well as user specific data
+- Persistant as well as volatile data
+- Also "contains" performance data
+  - Not really in the registry
+  - But the registry API is used to query this data.
+- Main hives:
+  - HKEY_LOCAL_MACHINE (HKLM) - Machine-wide settings
+    - Only the system account can see the SECURITY sub-key -- unless you change the permissions
+  - HKEY_CURRENT_USER (HKCU)- User-specific settings
+    - effectively just a clone (symlink) of one of the entries under HKEY_USERS
+  - HKEY_CURRENT_CONFIG - symlink to HKLM/HARDWARE/CONFIG
+  - HKEY_CLASSES_ROOT - symlink to two other places
+    - contains file type info for windows explorer ("open with" options)
+    - Also contains COM (component Object Model) GUID info for objects
+
+## Windows NT Design Goals
+- Separate address space per process
+  - One proc can't (easily) corrupt another's memory
+- Protected Kernel
+  - User mode applications can't crash kernel
+- Preemptive multitasking and multithreading
+- Multiprocessing support
+- Internationalization support using Unicode
+  - Set of standards for character encoding
+  - Windows NT designed to work with UTF-16 -- 16-bits per character ~65k characters
+  - not UTF-8 because each character may be a different size and accessing characters by index requires string traversal
+- Security throughout the system
+  - Can provide a security descriptor to every object in windows
+- Integrated networking
+- Powerful File system (NTFS)
+  - Supports protection, compression, and encryption
+  - does not require code to be written differently for encrypting or compressing files
+- Run most 16-bit Windows and DOS apps
+  - On 32-bit systems
+  - Some programs won't work -- very low-level access was allowed to programs in the early days of Windows, but not later
+- Run POSIX 1003.1 and OS/2 applications
+  - Originally conceived to run mostly OS/2 applications
+    - OS/2 subsystem originally planned as the main subsystem in windows -- changed direction when the windows subsystem became popular
+  - Can still run POSIX programs in windows under the POSIX view/subsystem (see [here](http://stackoverflow.com/questions/20339358/creating-posix-applications-in-windows-7))
+    - This means some file naming conventions from POSIX (eg: case sensitivity) may work -- but this is not allowed by the Windows API
+- Portable across processors and platforms
+- Be a great client as well as server platform
+
+
+
+
 
 
 
