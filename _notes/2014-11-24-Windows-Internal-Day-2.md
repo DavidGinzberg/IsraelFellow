@@ -336,3 +336,40 @@ DWORD WINAPI MyThread(PVOID param) {
 **Note:** priorities 16-32 are realtime, and windows will not change them.  
 Priorities 1-15 are dynamic. If a thread is in Waiting status for enough time (~4s) windows will boost its priority to give it a better chance to run (client only)  
 UI threads automatically get a priority boost (when in foreground or always?)
+
+#### The Scheduler
+- Scheduling routines are called when scheduling events occur
+  - Interval Timer interrupts checks for quantum end and timed wait completion
+  - I/O Completion calls
+  - Changes in thread priority
+  - Changing state of waitable object other threads are waiting on
+  - Entering a wait on one or more objects
+  - Entering sleep
+##### The Quantum
+- Schedular clock tick is typically
+  - 10 msec (uniprocessor)
+  - 15ms (multiprocessor)
+- Can determine with `clockres.exe` utility from SysInternals
+- Default client quantum is 2 clock ticks
+- Default server quantum is 12 clock ticks
+- Quantum can be modified by using the registry or a job
+- Quantum boosting
+  - On a system configured for short, variable quantum
+    - The foreground process gets triple quantum
+    - For any process with a priority class above idle
+ ##### Quantum Control
+ - Registry key: `HKLM\SYSTEM\CCS\Control\PriorityControl`
+ - Value: `Win32PrioritySeparation`
+ - Short vs. Long
+   - 1= long, 2=short
+   - 0,3=default (long for server, short for client)
+ - Variable vs Fixed
+   - 1=Boost priority of foreground process, 2=don't boost
+   - 0, 3=default (boost for Client, don't boost for Server)
+ - Foreground quantum boost
+   - index into a table (see slides)
+   
+##### Performance Options
+- System applet in control panel
+...
+
