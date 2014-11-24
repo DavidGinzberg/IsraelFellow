@@ -361,3 +361,45 @@ Kernel mode
 **Note:** C:\Windows\system32 contains 64-bit components (on 64-bit systems) and C:\Windows\system64 contains 32-bit components  
 32-bit processes running on 64-bit systems that request system32 will get the contents of system64 due to FS redirection  
 On a 32-bit system system32 just contains the 32-bit components (essentially, system32 contains the native components on whatever system it resides)
+
+###Symmetric Multiprocessing
+- SMP
+  - All CPUs are the same and share main memory and have equal access to peripheral devices (no master/slave)
+- Basic architecture supports up to 32/64 CPUs
+  - Win 7 64 bit & 2008 support for up to 256 cores
+  - Windows 8 /2012 supports up to 640 cores
+- Actual number of CPUs determined by licensing and product type
+  - Multiple cores do not count toward this limit.
+Symmetric -- All processors can execute any type of code -- no discrimination between kernel/user mode processors
+
+###The Windows API
+- Application Programming Interface for all Windows versions
+- Documented in the Windows SDK (Formerly Platform SDK)
+- Each version implements a different subset of the API
+- Now collectively called the windows API
+  - Previously referred to as the "Win32 API" (name still used today)
+- Contains functions in the following areas
+  - Base services
+  - user interface services
+  - component services
+  - graphics and multimedia
+  - messaging and collaboration
+  - networking
+- API Style
+  - Flat C functions
+  - COM (Component Object Model) -- object oriented framework to implement a set of interfaces; too big a subject to cover here
+- The new Windows Runtime (WinRT)
+
+
+###Subsystem DLLs
+- Every image belongs to exactly one subsystem
+  - Value stored in image PE header
+    - Can view with [Dependency Walker (Depends.exe)](http://www.dependencywalker.com/)
+    
+### The native API
+- Impllemented by NTDLL.DLL
+
+
+
+
+
