@@ -137,7 +137,62 @@ Flame & Windows Update MitM
     - Whether client is connected directly to the gateway
     - if there is a proxy
     - whether using DNS or [NBNS](http://wiki.wireshark.org/NetBIOS/NBNS)
-  - If proxy settings are set to `auto detect`, it uses WPAD (Web Proxy Auto Discovery) protocol, and sends an NBNS query for WPAD
+  - If proxy settings are set to `auto detect`, it uses [WPAD](http://en.wikipedia.org/wiki/Web_Proxy_Autodiscovery_Protocol) (Web Proxy Auto Discovery) protocol, and sends an NBNS query for WPAD
+- Flame listens and stores NBNS queries
+- if it's WPAD, spoof the response
+- Waits for HTTP connections to WU domains (only their hashes are stored) --why?
+- if User-agent and URI are one of the preset patterns, responds with corresponding payload
+- But update should be signed by MS
+- Cryptography flaws:
+  - [TSL](http://technet.microsoft.com/en-us/library/cc770371%28v=ws.10%29.aspx) (terminal services licensing) - Licensed Certificate generation for terminal servers
+    - Starting with Vista - this certificate is unable to sign code
+  -Flame authors managed to
+    - obtain one of these certificates
+    - Add code signing privileges
+    - Extra manipulations so that MD5 is still the same as the original
 
+- What did we have
+  - Flame sniffing NBNS to hijack WU requests
+  - Update signed by MS that installs Flame by manipulatin TSL using MD5 collision attack
+  - Have a cert with chain originating at MS, with code signing privileges. If this isn't a 0-day, what is?
+  - Alex Gostev (Kaspersky) said: "It actually looks more like a 'god mode' cheat code" - Mentioned in an interview with [Alex Gostev](http://blog.kaspersky.com/a-social-media-interview-with-alex-gostev/)
+  - (Two URLS for analysis of the exploit will be provided in the deck)
 
+## Case Study:  
+Stuxnet LNK vulnerability
 
+- Windows contains Control Panel applications
+  - Enable you to change settings in your computer - netwrokd, display, date, time etc
+- Their extension is CPL
+  - ncpa.cpl (network)
+  - Appwiz.cpl (program installation)
+- Located in `C:\Windows\System32`
+- Windows enables creating shortcuts to applications: LNK files
+- LNK files can also link to CPL applications
+- When you open a folder with Windows Explorer, it tries to display the icon for each of the files and folders in that folder
+  - This also applies to LNK files
+    - if a LNK file points to a CPL file, windows actually calls the DLL for that CPL in order to call the LoadImage method which displays the icon (also LoadLibraryW)
+    - This allows code execution
+-Stuxnet created a CPL-like LNK file, only it referred to the ~WRT4141.tmp - a DLL that loads the main Stuxnet DLL named ~WTR4132.tmp (on the same USB flash drive)
+
+- What's left is just to:
+  - Hide the evidence
+  - Drop Stuxnet on the PC that the USB storage device is connected to
+  - Continue to chase after the Iranian Uranium enrichment control systems and save the world....
+
+  
+- what do we have?
+  - No memory corruption, buffer overflows, etc
+  - No screenshots from IDA/Immunity/WinDBG
+  -Just not-security-oriented programmer, who thought that loading a DLL without any user interaction except viewing a folder is a good idea
+
+## A Little Philosophy
+- Why are there always more and more vulnerabilities?
+- Defender-Attacker axiom
+- What are the disadvantages of the presented case studies?
+- Vulnerabilities are just everywhere
+  - Mobile
+  - Cars
+  - Smart TV
+  - Microwave (Really? Really.)
+- Systems are not vulnerable, humans are.
