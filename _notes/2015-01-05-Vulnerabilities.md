@@ -77,7 +77,7 @@ David Oren
     - worse: leaving the control panel open to connections on the Internet
 
 ##Implementation Vulnerability: Buffer Overflow Intro
-- Basic concept demonstrated on [Wikipedai](http://en.wikipedia.org/wiki/Stack_buffer_overflow#Exploiting_stack_buffer_overflows):
+- Basic concept demonstrated on [Wikipedia](http://en.wikipedia.org/wiki/Stack_buffer_overflow#Exploiting_stack_buffer_overflows):
 ```C
 #include <string.h>
  
@@ -93,3 +93,51 @@ int main (int argc, char **argv)
    foo(argv[1]);
 }
 ```
+
+
+##Buffer overflow case study:  
+Conficker & MS08-067 AKA CVE-2008-4250  
+Microsoft Server Service remote code execution vulnerability
+
+###Conficker & MS08-067
+- Server Service - Networking feature in Windows
+- Supports file, print, an dnamed-pipe sharing
+- the latter is used for [Remote Procedure Calls(RPC)](http://en.wikipedia.org/wiki/Remote_procedure_call) (http://msdn.microsoft.com/en-us/library/windows/desktop/aa378651%28v=vs.85%29.aspx)
+- Usually client-server over USB (SRVSVC)
+- [NetprPathCanonicalize](http://msdn.microsoft.com/en-us/library/cc247258.aspx) - canonicalization RPC
+
+
+**Aside:**
+#### RPC - NetprPathCanonicalize -ation
+`C:\Windows` :arrow_right: `C/Windows`  
+`"C:\Windows\../Program Files"` :arrow_right: `"C/Program Files"`
+
+### Conficker & MS08-067 (cont.)
+- NetprPathCanonicalize: PathName (String) argument
+- The vuln exists in PathName processing
+  - The traversal passes the root directory
+- Normal case:
+  - `C:\program files\..\Windows` :arrow_right: `c/windows`
+- Vulnerable:
+  - `/<name>/../../<rest of path>` :arrow_right: `/../<rest of path>`
+  - Processes the extra `/..`, and searches the stack for the previous slash and copies the rest of the path to be right after the slash found.
+  - Buffer Overflow
+
+## MD5 Collision attack case study:  
+Flame & Windows Update MitM 
+- Windows updates are almost always enabled
+- Flame contained no new/ zero-day vulnerabilities, just previous exploits from Conficker and Stuxnet
+- In June 2012 Flame was discovered to use Windows upate mechanism to spread
+- How?
+  - Usually we get updates from official MS domains
+  - Connection is HTTPS (HTTP over SSL)
+  - The update file is signed by Microsoft CA
+- Step-by-step
+  - MS wants to make WU mechanism as generic as possible
+    - Whether client is connected directly to the gateway
+    - if there is a proxy
+    - whether using DNS or [NBNS](http://wiki.wireshark.org/NetBIOS/NBNS)
+  - If proxy settings are set to `auto detect`, it uses WPAD (Web Proxy Auto Discovery) protocol, and sends an NBNS query for WPAD
+
+
+
