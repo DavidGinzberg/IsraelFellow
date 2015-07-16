@@ -39,7 +39,7 @@ google_analytics:
 
 # Your website URL (e.g. http://barryclark.github.io or http://www.barryclark.co)
 # Used for Sitemap.xml and your RSS feed
-url: www.afellowinisrael.com
+url: https://www.afellowinisrael.com
 
 # If you're hosting your site at a Project repository on GitHub pages 
 # (http://yourusername.github.io/repository-name)
@@ -47,7 +47,7 @@ url: www.afellowinisrael.com
 # then add in the baseurl here, like this: "/repository-name"
 #baseurl: "/IsraelFellow"
 #removed to fix css on domain. Need to find a way to have both work.
-baseurl: www.afellowinisrael.com
+baseurl: https://www.afellowinisrael.com
 
 #
 # !! You don't need to change any of the configuration flags below !!
