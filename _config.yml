@@ -2,6 +2,8 @@
 # This file contains configuration flags to customize your site
 #
 
+enforce_ssl: www.afellowinisrael.com
+
 # Name of your site (displayed in the header)
 name: A Fellow In Israel
 
